@@ -17,9 +17,13 @@ float의 해제를 하기 위해서는 먼저 float의 특성을 알아야 합�
 ### 부모 요소에 height 값 부여
 
 부모 요소에 height 값을 부여하여 float을 해제하는 방법입니다.
+
 ![float clear parent height](./float_clear_parent_height1.png)
+
 부모 요소의 height 값이 없는 경우 그림과 같이 같이 좌우로 floating 된 요소를 가지고 있는 부모 요소를 점선으로 표시했습니다.
+
 ![float clear parent height](./float_clear_parent_height2.png)
+
 floating 된 자식 요소의 height 값만큼을 부모 요소에 height 값을 부여해 공간을 늘려 마치 floating 된 내용이 해제된 것처럼 보이는 효과를 줍니다.
 
 ```html
@@ -75,7 +79,9 @@ floating 된 자식 요소의 height 값만큼을 부모 요소에 height 값을
 코드의 주석 내용과 같이 두 자식인 .box의 height 값이 100px로 고정일 경우에 부모인 .parent에 똑같은 height 값인 100px을 부여함으로써 float의 영향에서 벗어난 것처럼 만들 수 있습니다.
 
 하지만 이는 전체의 흐름을 방해하지 않도록 하는 방법일 뿐 정확하게는 float이 해제된 것처럼 보이는 눈속임과 같은 해제 방법이라고 할 수 있습니다.
+
 ![float clear parent height](./float_clear_parent_height3.png)
+
 예를 들어 .box2의 height 값을 200px로 바꾼다면 부모의 height 값은 고정이기 때문에 이처럼 자식 요소가 넘치는 현상이 일어나게 됩니다.
 
 결론적으로 이 방법은 자식 요소가 고정된 height 값을 가지며 부모 역시 고정된 height 값을 가진 경우에만 사용할 수 있습니다.
@@ -136,7 +142,9 @@ floating 된 자식 요소의 height 값만큼을 부모 요소에 height 값을
 ```
 
 .wrap으로부터 주어진 width: 400px;의 값에서 부모가 floating 되면서 스스로의 사이즈를 수렴되는 자식 요소의 가로 사이즈 만큼으로 줄어듭니다.
+
 ![float clear parent float](./float_clear_parent_float.png)
+
 이미지와 같이 부모가 float 속성을 이미 가지고 있을 시에는 자식의 float 속성을 따로 해제해 주지 않아도 됩니다.
 하지만 그 부모의 요소 또한 float의 영향을 받기 때문에 부모 요소인 .parent가 floating 되면서 .parent의 부모인 .wrap이 float의 해제가 필요한 상태가 됩니다.
 
@@ -212,14 +220,20 @@ floating 된 자식 요소의 height 값만큼을 부모 요소에 height 값을
 방법은 아주 간단합니다.
 부모 요소에 overflow 속성을 부여하면 됩니다. (visible 제외)
 (팝업이 position: absolute; 속성을 이용하여 띄워진다는 가정 하에 부모 요소에 position: relative; 속성이 추가되었습니다.)
+
 ![float clear parent overflow](./float_clear_parent_overflow1.png)
+
 위와 같은 방법으로 아주 간단한 한 줄을 추가하여 float의 상황에서 벗어날 수 있습니다.
 
 예를 들어 부모 요소에 height 값 부여 방법에서의 문제점이었던 .box2의 height 값을 200px로 변경하더라도 자식의 height 값을 그대로 수렴합니다.
+
 ![float clear parent overflow](./float_clear_parent_overflow2.png)
+
 하지만 이 방법에도 치명적인 단점이 있습니다.
 만약 이 부모 요소 안에 부모의 영역을 벗어나는 팝업과 같은 자식 컨텐츠가 있을 경우 팝업의 내용이 보이지 않는 현상이 일어납니다.
+
 ![float clear parent overflow](./float_clear_parent_overflow3.png)
+
 overflow 속성을 부여하는 방법의 유일하고 가장 큰 단점 중에 하나입니다.
 
 결론적으로 이 방법을 사용하여 float을 해제할 때에는 이처럼 안의 내용 중에 부모의 내용을 넘쳐나서 노출되는 컨텐츠는 없는지 확인이 되고 파악이 됐을때 사용하여야 합니다.
@@ -288,10 +302,14 @@ clear 속성은 float의 흐름을 끊기 위한 float 해제 전용 속성입�
 ```
 
 설명에 앞서 clear 속성의 값을 잠깐 설명하자면 clear는 none, left, right, both의 속성 값을 가질수 있으며, 이는 각각 float의 left, right, 방향에 상관없이 좌우 모두 해제를 할 수 있습니다. (none은 default 값으로 해제를 하지 않습니다.)
+
 ![float clear adjacent sibling clear](./float_clear_adjacent_sibling_clear1.png)
+
 그림과 같이 마크업의 순서로 보자면 자식 요소가 box1, box2, 빈 `<span>` 태그의 순서로 되어 있습니다.
 box1, 2는 좌, 우로 floating 되어있는 상태이고, 그와 인접해 있는 형제 요소인 빈 `<span>` 태그에 clear: both; 속성이 부여되었습니다.
+
 ![float clear adjacent sibling clear](./float_clear_adjacent_sibling_clear2.png)
+
 이 방법 또한 .box2의 height 값을 200px로 변경하더라도 자식의 height 값을 그대로 수렴합니다.
 
 clear 속성을 사용하기 위해서는 해당 요소가 block-level 요소여야만 부모 요소의 사이즈를 상속받아서 해제가 가능하기 때문에 display: block; 속성을 추가하여 inline-level인 `<span>` 태그를 block-level로 변경해 주었습니다.
@@ -366,7 +384,9 @@ clear 속성을 사용하기 위해서는 해당 요소가 block-level 요소여
 부모의 :after 가상 요소를 블록 요소로 변경하기 위해 display: block; 속성이 필요하고, float의 해제를 위해 clear 속성을 추가하였습니다.
 
 마지막으로 가상 요소는 content 속성이 필수이기 때문에, content 속성의 값을 빈 값으로 지정해 주어 빈 태그를 넣어준 것과 같은 효과를 만들어 주었습니다.
+
 ![float clear pseudo element clear](./float_clear_pseudo_element_clear.png)
+
 이렇게 하면 빈 태그로 clear 속성을 준 효과와 동일한 효과를 주면서 시멘틱 마크업에 반하지 않는 그런 해제 방법이 완성됩니다.
 
 이 해제 방법은 부모 요소에 overflow 속성을 사용하는 방법의 단점인 부모 요소의 영역을 벗어나는 팝업과 같은 자식 컨텐츠가 존재하는 경우에도 대응이 됩니다.
