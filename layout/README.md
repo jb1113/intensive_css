@@ -242,8 +242,8 @@
 
     			.content {
     				max-width: 1200px;
-    				margin: 0 auto;
     				height: 300px;
+    				margin: 0 auto;
     				background-color: yellowgreen;
     			}
 
@@ -1016,3 +1016,5 @@
     ### 참고자료
 
     [box-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)
+
+- 고정 레이아웃 제작
