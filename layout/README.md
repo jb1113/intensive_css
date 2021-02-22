@@ -1018,3 +1018,704 @@
     [box-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)
 
 - 고정 레이아웃 제작
+
+    고정 레이아웃이란 1단 또는 2단 레이아웃의 형태에서 상단(header)과 하단(footer) 또는 그 두 영역이 모두 컨텐츠의 높이나 내용에 상관없이 항상 노출이 되도록 하는 레이아웃 형태입니다.
+
+    ### 고정 레이아웃 형태를 가진 사이트들
+
+    - (네이버 소프트웨어야 놀자) [https://www.playsw.or.kr/main](https://www.playsw.or.kr/main)
+    - (네이버 오디오클립) [https://audioclip.naver.com](https://audioclip.naver.com)
+    - (라인) [https://line.me/ko](https://line.me/ko)
+
+    ### 주요 기능
+
+    - header 영역과 footer 영역이 상하단에 고정 노출
+    - 컨텐츠의 최소 높이 값이 100%인 레이아웃 형태 제작
+
+    ### 스타일 정보
+
+    - header 상단 고정
+    - footer 하단 고정
+    - 컨텐츠 최소 높이 값 100%
+
+    ### 주요 태그 및 속성
+
+    **HTML**
+
+    - div
+
+    **CSS**
+
+    - position: fixed
+    - min-height
+    - padding
+    - margin
+
+    ---
+
+    ### 상단 고정 레이아웃
+
+    ### HTML 실습
+
+    1단 레이아웃과 같은 구조에서 content는 실제로 화면을 구성하는 요소라고 생각하고, 고정형 레이아웃을 위한 스타일을 부여하기 위해 container라는 이름을 가진 `<div>` 태그로 한 번 더 감싸 부모 요소를 만들도록 하겠습니다.
+
+    ```html
+    <div class="wrap">
+    	<div class="header">header</div>
+    	<div class="container">
+    		<div class="content">content</div>
+    	</div>
+    	<div class="footer">footer</div>
+    </div>
+    ```
+
+    ---
+
+    ### CSS 실습 (기본)
+
+    두 가지의 상단 고정형 레이아웃을 만들어 봅니다.
+    기본적인 상단 고정 레이아웃을 만들고, box-sizing 속성을 이용하여 더 간단하게 상단 고정 레이아웃을 만드는 방법을 알아봅니다.
+
+    **1. 기본 태그에 스타일 부여**
+
+    ```css
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    먼저 각 영역에 스타일을 부여하여 스타일 변화를 확인할 수 있도록 합니다.
+
+    **2. header를 상단에 고정**
+
+    ```css
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed; /* position 고정 */
+    	/* 상단 header 위치 조정 */
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    고정시킬 header 영역에 position: fixed; 속성을 부여하여 항상 화면 상단에 고정되어 있도록 위치값을 지정합니다.
+
+    left: 0; right: 0; 값으로 인하여 각 영역은 width: 100% 처럼 동작합니다.
+
+    **3. 컨텐츠 영역 최소 높이값 설정**
+
+    ```css
+    html, body, .wrap { /* container의 min-height 값이 스스로 높이값을 가질수 없기 때문에 최상단 부모 요소로부터 상속받아야 함 */
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%; /* 사이트 최소 높이값 100% */
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    container의 높이 값을 최소 100%를 유지하기 위하여 min-height: 100%; 속성을 설정해 줍니다.
+    하지만 확인을 해보면 높이값이 100%로 설정되지 않습니다.
+    그 이유는 container의 height 값은 스스로 높이 값을 가질수 없기 때문에, 부모 요소로부터 높이 값을 상속받아야 합니다.
+    때문에 html > body > .wrap > container의 순서대로 높이 값을 상속 받기 위하여 html, body, .wrap 에 height: 100%; 속성을 추가합니다.
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+    ```
+
+    위와 같이 부모 요소의 height 값을 100%로 추가한다면, container의 높이가 부모로부터 받은 height 값을 상속받아 min-height 속성이 제대로 부여되는 것을 확인할 수 있습니다.
+
+    **4. footer 영역 끌어올리기**
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%;
+    	margin-top: -100px; /* footer의 높이 값 100px만큼 음수 값 margin을 이용하여 위로 끌어 올림 */
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    container의 최소 높이값이 100%이기 때문에 footer의 높이 값 100px만큼 더해져서 스크롤 되는 것을 확인할 수 있습니다.
+
+    전체 컨텐츠의 크기가 우리가 요구했던 높이 값보다 더 많아졌기 때문에 maring을 top 방향으로 footer의 높이 값 100px만큼 끌어올려주기 위해서 margin-top: -100px; 을 추가합니다.
+
+    **5-1. content 상단 보이기**
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%;
+    	margin-top: -100px;
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	padding-top: 200px; /* content가 header 아래에서부터 시작할 수 있도록 끌어 올려진 200px 만큼 밀어냄 */
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    container의 margin-top: -100px; 속성으로 인하여 content의 윗부분이 보이지 않는 것을 확인할 수 있습니다.
+    header가 position: fixed; 속성을 가지면서 header의 뒤쪽으로 content가 header의 높이 값 100px만큼 가려졌고, 또한 footer를 전체 높이 100%에 노출시키기 위하여 margin-top: -100px; 속성을 사용하면서 footer의 높이 값 100px 만큼 container가 끌어 올려졌기 때문입니다.
+
+    content가 header 아래에서부터 시작할 수 있도록 총 끌어 올려진 200px 만큼을 padding-top 속성을 이용하여 밀어냅니다.
+
+    ---
+
+    ### 실습 코드
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="ko">
+    	<head>
+    		<meta charset="UTF-8">
+    		<title>레이아웃 - 상단 고정 레이아웃 제작</title>
+    		<link rel="stylesheet" href="./reset.css">
+    		<style>
+    			html, body, .wrap {
+    				height: 100%;
+    			}
+
+    			.wrap {
+    				min-width: 800px;
+    				text-align: center;
+    			}
+
+    			.header {
+    				position: fixed;
+    				top: 0;
+    				right: 0;
+    				left: 0;
+    				height: 100px;
+    				background-color: crimson;
+    			}
+
+    			.container {
+    				min-height: 100%;
+    				margin-top: -100px;
+    			}
+
+    			.content {
+    				max-width: 1200px;
+    				height: 800px;
+    				padding-top: 200px;
+    				margin: 0 auto;
+    				background-color: yellowgreen;
+    			}
+
+    			.footer {
+    				height: 100px;
+    				background-color: dodgerblue;
+    			}
+    		</style>
+    	</head>
+    	<body>
+    		<div class="wrap">
+    			<div class="header">header</div>
+    			<div class="container">
+    				<div class="content">content</div>
+    			</div>
+    			<div class="footer">footer</div>
+    		</div>
+    	</body>
+    </html>
+    ```
+
+    ---
+
+    ### CSS 실습 (box-sizing: border-box;)
+
+    이번에는 box-sizing 속성을 이용하여 더 간단하게 상단 고정 레이아웃을 만드는 방법을 알아봅니다.
+
+    위에서 진행했던 상단 고정 레이아웃 방식과 footer 영역 끌어올리기 까지의 내용은 동일하기 때문에 그 이후 달라지는 부분부터 진행하도록 하겠습니다.
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%;
+    	margin-top: -100px;
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    기존에는 content를 header 아래에서부터 시작하도록 하기위해서 padding-top 속성을 이용하여 끌어 올려진 200px 만큼을 밀어냈습니다.
+
+    하지만 여기서는 레이아웃을 만들어주는 container에 padding-top 속성을 부여하고, content는 영향을 받지 않도록 진행합니다.
+
+    **5-2. box-sizing: border-box; 속성으로 padding 값 무시**
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%;
+    	padding-top: 200px; /* content가 아닌 container에 끌어올려진 200px 만큼 밀어냄 */
+    	margin-top: -100px;
+    	box-sizing: border-box; /* padding이나 border가 컨텐츠의 전체 크기에 포함되도록 (영향을 미치지 않도록) */
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    content가 아닌 container에 padding-top: 200px; 속성을 부여하여 content가 header 아래에서부터 시작하도록 만들어 주고, 내용이 전부 container의 min-height: 100%; 에 포함되기 때문에 padding 값을 사이즈에 포함할 수 있도록 하는 box-sizing: border-box; 속성을 추가하였습니다.
+
+    이렇게 하면 content 요소는 건드리지 않고, container에 레이아웃에 관련된 속성을  부여할 수 있습니다.
+
+    ---
+
+    ### 실습 코드
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="ko">
+    	<head>
+    		<meta charset="UTF-8">
+    		<title>레이아웃 - box-sizing을 이용한 상단 고정 레이아웃 제작</title>
+    		<link rel="stylesheet" href="./reset.css">
+    		<style>
+    			html, body, .wrap {
+    				height: 100%;
+    			}
+
+    			.wrap {
+    				min-width: 800px;
+    				text-align: center;
+    			}
+
+    			.header {
+    				position: fixed;
+    				top: 0;
+    				right: 0;
+    				left: 0;
+    				height: 100px;
+    				background-color: crimson;
+    			}
+
+    			.container {
+    				min-height: 100%;
+    				padding-top: 200px;
+    				margin-top: -100px;
+    				box-sizing: border-box;
+    			}
+
+    			.content {
+    				max-width: 1200px;
+    				height: 800px;
+    				margin: 0 auto;
+    				background-color: yellowgreen;
+    			}
+
+    			.footer {
+    				height: 100px;
+    				background-color: dodgerblue;
+    			}
+    		</style>
+    	</head>
+    	<body>
+    		<div class="wrap">
+    			<div class="header">header</div>
+    			<div class="container">
+    				<div class="content">content</div>
+    			</div>
+    			<div class="footer">footer</div>
+    		</div>
+    	</body>
+    </html>
+    ```
+
+    ---
+
+    ### 상, 하단 고정 레이아웃
+
+    ### HTML 실습
+
+    상단 고정 레이아웃과 동일합니다.
+
+    ```html
+    <div class="wrap">
+    	<div class="header">header</div>
+    	<div class="container">
+    		<div class="content">content</div>
+    	</div>
+    	<div class="footer">footer</div>
+    </div>
+    ```
+
+    ---
+
+    ### CSS 실습
+
+    상단 고정 레이아웃과 동일하게 상단(header)을 고정한 상태에서 하단(footer)을 고정시키기 위해 상단(header)와 동일하게 position: fixed; 속성을 이용합니다.
+
+    **1. header와 footer 고정시키기**
+
+    ```css
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed; /* position 고정 */
+    	/* 상단 header 위치 조정 */
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	position: fixed; /* position 고정 */
+    	/* 하단 footer 위치 조정 */
+    	bottom: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    **2. container 최소 높이값 설정**
+
+    ```css
+    html, body, .wrap { /* container의 min-height 값이 스스로 높이값을 가질수 없기 때문에 최상단 부모 요소로부터 상속받아야 함 */
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%; /* 최소 높이값 100% */
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	position: fixed;
+    	bottom: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    **3. container 노출 영역 설정**
+
+    ```css
+    html, body, .wrap {
+    	height: 100%;
+    }
+
+    .wrap {
+    	min-widht: 800px;
+    	text-align: center;
+    }
+
+    .header {
+    	position: fixed;
+    	top: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: crimson;
+    }
+
+    .container {
+    	min-height: 100%;
+    	padding: 100px 0; /* header, footer 뒤로 가려진 container 영역의 노출을 위해서 상, 하로 밀어냄 */
+    	box-sizing: border-box; /* padding 값을 최소 높이 100%에서 무시하도록 속성 추가 */
+    }
+
+    .content {
+    	max-width: 1200px;
+    	height: 300px;
+    	margin: 0 auto;
+    	background-color: yellowgreen;
+    }
+
+    .footer {
+    	position: fixed;
+    	bottom: 0;
+    	right: 0;
+    	left: 0;
+    	height: 100px;
+    	background-color: dodgerblue;
+    }
+    ```
+
+    마지막으로 현재 container의 영역은 header와 footer 영역에 의해 위와 아래가 각각 100px씩 보이지 않고 있기때문에, 이 문제를 해결하기 위해서 padding 값을 위와 아래에 각각 100px씩을 부여하여 밀어내도록하여 content 영역이 header의 바로 아래부터 시작하도록 만들었고, box-sizing: border-box; 속성을 부여하여 높이값 100%에서 추가된 padding 값을 포함할 수 있도록 해주었습니다.
+
+    ---
+
+    ### 요약 정리
+
+    position: fixed; 속성은 요소가 가지고 있는 크기를 흐름에서 아예 제외시키기 때문에 주변의 다른 요소들의 위치값에도 변동이 생기게 됩니다.
+    이것을 해결하기 위해 margin과 padding 값을 이용해 높이 값에서 사라진 크기만큼을 채워 넣는 방식으로 해결하였습니다.
+
+    또한, height 속성의 값은 요소 스스로 높이 값을 갖지 못하기 때문에 부모에게서 상속을 받아서 사용할 수 있었습니다.
+    content의 최소 높이 값 100%를 확보하기 위해서, container 요소의 margin을 음수 값으로 부여하는 방법을 통해 해결할 수 있었습니다.
+
+    이러한 방법들은 레이아웃을 만드는 과정에서 뿐만 아니라 다양한 스타일을 구현하기 위해서 정확한 이해가 필요한 속성들입니다.
+
+    ---
+
+    ### 실습 코드
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="ko">
+    	<head>
+    		<meta charset="UTF-8">
+    		<title>상, 하단 고정 레이아웃 제작</title>
+    		<link rel="stylesheet" href="./reset.css">
+    		<style>
+    			html, body, .wrap {
+    				height: 100%;
+    			}
+
+    			.wrap {
+    				min-width: 800px;
+    				text-align: center;
+    			}
+
+    			.header {
+    				position: fixed;
+    				top: 0;
+    				right: 0;
+    				left: 0;
+    				height: 100px;
+    				background-color: crimson;
+    			}
+
+    			.container {
+    				min-height: 100%;
+    				padding: 100px 0;
+    				box-sizing: border-box;
+    			}
+
+    			.content {
+    				max-width: 1200px;
+    				height: 300px;
+    				margin: 0 auto;
+    				background-color: yellowgreen;
+    			}
+
+    			.footer {
+    				position: fixed;
+    				bottom: 0;
+    				right: 0;
+    				left: 0;
+    				height: 100px;
+    				background-color: dodgerblue;
+    			}
+    		</style>
+    	</head>
+    	<body>
+    		<div class="wrap">
+    			<div class="header">header</div>
+    			<div class="container">
+    				<div class="content">content</div>
+    			</div>
+    			<div class="footer">footer</div>
+    		</div>
+    	</body>
+    </html>
+    ```
