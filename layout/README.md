@@ -33,6 +33,8 @@
     1단 레이아웃은 레이아웃의 종류 중에 가장 기본이 되는 레이아웃입니다.
     때문에 레이아웃 제작 과정중에 가장 단순하고 쉽습니다.
 
+    ![1-column_layout](./1-column_layout.png)
+
     1단 레이아웃은 하나의 행(column)으로 이루어진 레이아웃의 형태를 일컫습니다.
 
     이런 형태의 레이아웃은 웹에서 가장 기본이 되는 레이아웃이며 위의 이미지처럼 상단(header), 중단(contents), 하단(footer)의 구성으로 이루어져있는 것이 가장 일반적입니다.
@@ -184,6 +186,12 @@
 
     위의 순서대로 따라 했다면 브라우저에서 확인했을때 아래와 같은 스타일 변화를 볼 수 있습니다.
 
+    ![1-column_layout1](./1-column_layout1.png)
+
+    ![1-column_layout2](./1-column_layout2.png)
+
+    ![1-column_layout3](./1-column_layout3.png)
+
     ---
 
     ### 요약 정리
@@ -266,6 +274,8 @@
 - 다단 레이아웃 제작
 
     다단 레이아웃은 1단 레이아웃과 함께 매우 대표적인 레이아웃 형태 중 하나입니다.
+
+    ![multi-column_layout](./multi-column_layout.png)
 
     예시 이미지와 같이 콘텐츠의 영역이 2개 또는 그 이상의 열(column)로 나눠진 레이아웃을 행의 개수에 따라 2단 레이아웃, 3단 레이아웃으로 부르고 있으며 이런 열의 개수에 따른 레이아웃들을 통틀어서 다단 레이아웃(multi column layout)이라고 부릅니다.
 
@@ -376,6 +386,8 @@
 
     먼저 요구사항에 맞게 각 영역에 적당한 너비와 높이, 색상을 부여하여 확인하기 쉽도록 하고 1단 레이아웃과 같은 형태로 만들어 줍니다.
 
+    ![2-column_layout_with_float1](./2-column_layout_with_float1.png)
+
     aside가 block 요소이기 때문에 아래로 그냥 떨어지는 형태가 됩니다.
     aside 영역을 content 영역의 옆으로 붙이기 위해서 float을 추가합니다.
 
@@ -419,6 +431,8 @@
 
     하지만 이것만으로 float을 통해 정렬하는 과정이 끝난것은 아닙니다.
     이렇게 하면 footer 영역이 content 영역과 aside 영역의 뒤로가서 header 영역과 붙어버립니다.
+
+    ![2-column_layout_with_float2](./2-column_layout_with_float2.png)
 
     이를 위해서는 aside 영역 뒤에 오는 요소(footer)를 float에서 해제해야 합니다.
 
@@ -465,6 +479,8 @@
     ```
 
     이제 footer 영역이 float의 영향에서 해제되었습니다.
+
+    ![2-column_layout_with_float3](./2-column_layout_with_float3.png)
 
     이렇게 해서 원하는 모습의 기본 모습이 완성되었습니다.
     float을 해제하는 방법은 여러 방법이 존재하며, 각 방법을 상황에 따라 적절하게 이용합니다.
@@ -521,9 +537,13 @@
 
     content 영역과 aside 영역을 가운데 정렬시키기 위해 두 영역을 감싸고 있는 container 영역에 가운데 정렬을 위한 margin: 0 auto;를 추가합니다.
 
+    ![2-column_layout_with_float4](./2-column_layout_with_float4.png)
+
     요구사항인 container 영역의 최소 높이 100%를 가질수 있도록 min-height 속성을 추가합니다.
 
     그리고 이 min-height 값은 최상단의 부모 요소로부터 상속을 받아야 되기 때문에 html, body, .wrap에 height 값을 100%를 주어야 container의 min-height 값이 적용됩니다.
+
+    ![2-column_layout_with_float5](./2-column_layout_with_float5.png)
 
     이렇게 되면 footer 영역이 화면 아래로 내려가게 되므로 footer 영역을 다시 끌어올려야 합니다.
 
@@ -535,6 +555,8 @@
     이는 padding에 min-height 값이 포함되어서 그렇습니다.
 
     padding 값이 min-height 값에 영향을 주지 않게 하기 위하여 box-sizing: border-box; 속성을 주어 해결합니다.
+
+    ![2-column_layout_with_float6](./2-column_layout_with_float6.png)
 
     padding 값이 min-height값에 포함되지 않아, footer 영역이 정상적으로 맨 아래에 붙는 것을 확인할 수 있습니다.
 
@@ -594,10 +616,14 @@
 
     예를 들어, 현재 content 영역의 height 값이 임의의 값 300px이 들어가 있는데 이것보다 더 길어지는 경우 height 값이 500px인 경우에는 content 영역의 오른쪽에 border-right 속성을 이용하여 border를 줍니다.
 
+    ![2-column_layout_with_float7](./2-column_layout_with_float7.png)
+
     하지만 확인해보면 aside 영역이 아래로 떨어집니다.
     이는 border의 5px이 content의 width 값 500px과 합해져 505px이 되므로, 가로 길이가 505px되어 버렸고, aside의 300px과 더해지면 container의 width 값인 800px을 넘어버리기 때문에 떨어지는 것입니다.
 
     그래서 이를 해결하기 위해서 content의 width값을 495px로 줄여도 되지만, 이전에  container에 사용했던 방법으로 box-sizing 속성을 이용하여 border의 값이 width 값에 영향을 끼치지 않도록 하여 문제를 해결합니다.
+
+    ![2-column_layout_with_float8](./2-column_layout_with_float8.png)
 
     다시 정상적으로 aside가 위로 올라온 것을 확인할 수 있습니다.
 
@@ -673,7 +699,11 @@
 
     때문에 해당 위치는 top: 100px, right: 300px; bottom: 100px;이 되고, 기준점은 container가 됩니다.
 
+    ![2-column_layout_with_float9](./2-column_layout_with_float9.png)
+
     border 대신 after 가상요소를 이용하여 가상의 도형을 만들고 position 속성을 이용해서 구현한 이유는 content와 aside 영역 중 한 영역만 길어지는 경우 구분선이 어느 한 쪽 영역에 종속되어 있다면 header에서 footer까지 이어지는 구분선을 구현할 수 없기 때문입니다.
+
+    ![2-column_layout_with_float10](./2-column_layout_with_float10.png)
 
     하지만 가상요소를 이용하면 content의 양이 늘어나면서 container가 늘어나더라도 구분선이 제대로 동작합니다.
 
@@ -801,6 +831,8 @@
     }
     ```
 
+    ![2-column_layout_with_display_table1](./2-column_layout_with_display_table1.png)
+
     각 영역에 스타일을 부여해 확인히 편한 상태로 다음 단계를 진행합니다.
 
     **2. display: table, display: table-cell 속성을 이용하여 정렬**
@@ -849,6 +881,8 @@
 
     display: table과 display: table-cell 속성은 table과 동일한 효과를 주기 때문에 부모 요소인 container의 width 값을 부여한 상태에서 한쪽에 width 값을 안다면 나머지 한쪽의 width 값은 따로 지정해주지 않아도 됩니다.
 
+    ![2-column_layout_with_display_table2](./2-column_layout_with_display_table2.png)
+
     display: table과 display: table-cell 속성만으로도 정렬이 되었습니다.
 
     하지만 자식 요소인 content 영역 500px과 aside 영역 300px을 유지해야 하는데 창 크기가 줄어들면 임의적으로 줄어드는것을 확인할 수 있습니다.
@@ -858,11 +892,15 @@
 
     그리고 이 min-height 값은 최상단의 부모 요소로부터 상속을 받아야 되기 때문에 html, body, .wrap에 height 값을 100%를 주어야 container의 min-height 값이 적용됩니다.
 
+    ![2-column_layout_with_display_table3](./2-column_layout_with_display_table3.png)
+
     content와 aside 영역이 container의 크기만큼 늘어난 것을 확인할 수 있습니다.
 
     하지만 header와 footer가 한 화면에 보여야 하기 때문에 container에 padding을 위, 아래로 100px을 주어 떨어뜨린 후, margin을 -100px을 주어 그 영역만큼 다시 당겨옵니다.
 
     그리고 padding이 min-height 속성에 영향을 주지 않게 하기 위해 box-sizing: border-box; 속성을 추가하겠습니다.
+
+    ![2-column_layout_with_display_table4](./2-column_layout_with_display_table4.png)
 
     이렇게 속성을 추가해주고 나면 우리가 원했던 대로 header와 footer가 한 화면에 보이는 것을 확인할 수 있습니다.
 
@@ -920,10 +958,14 @@
 
     구분선은 content의 높이를 그대로 가지기 때문에 content 오른편 또는 aside 왼편으로 구분선을 넣으면 원하는 구분선을 구현할 수 있습니다.
 
+    ![2-column_layout_with_display_table5](./2-column_layout_with_display_table5.png)
+
     구분선의 크기만큼 content의 width 값에서 빼주어 구분선을 포함한 가로 길이가 원래의 가로 길이를 넘지 않게 해주었습니다.
     또는 box-sizing: border-box; 속성을 이용하여 content의 가로 길이가 구분선의 크기까지 포함하도록 만들수도 있습니다.
 
     이 방법의 경우 구분선을 넣어주는 것이 높이 값을 상속받으므로, border 속성을 추가해주기만 하면 되기 때문에, float을 이용한 방법보다 훨씬 간단합니다.
+
+    ![2-column_layout_with_display_table6](./2-column_layout_with_display_table6.png)
 
     예를 들어, content의 내용이 길어지는 경우에도 자동으로 늘어나는 것을 확인할 수 있습니다.
 
@@ -1020,6 +1062,8 @@
 - 고정 레이아웃 제작
 
     고정 레이아웃이란 1단 또는 2단 레이아웃의 형태에서 상단(header)과 하단(footer) 또는 그 두 영역이 모두 컨텐츠의 높이나 내용에 상관없이 항상 노출이 되도록 하는 레이아웃 형태입니다.
+
+    ![fixed_layout](./fixed_layout.gif)
 
     ### 고정 레이아웃 형태를 가진 사이트들
 
@@ -1137,6 +1181,8 @@
 
     고정시킬 header 영역에 position: fixed; 속성을 부여하여 항상 화면 상단에 고정되어 있도록 위치값을 지정합니다.
 
+    ![top_fixed_layout1](./top_fixed_layout1.png)
+
     left: 0; right: 0; 값으로 인하여 각 영역은 width: 100% 처럼 동작합니다.
 
     **3. 컨텐츠 영역 최소 높이값 설정**
@@ -1190,6 +1236,8 @@
 
     위와 같이 부모 요소의 height 값을 100%로 추가한다면, container의 높이가 부모로부터 받은 height 값을 상속받아 min-height 속성이 제대로 부여되는 것을 확인할 수 있습니다.
 
+    ![top_fixed_layout2](./top_fixed_layout2.png)
+
     **4. footer 영역 끌어올리기**
 
     ```css
@@ -1232,6 +1280,8 @@
     container의 최소 높이값이 100%이기 때문에 footer의 높이 값 100px만큼 더해져서 스크롤 되는 것을 확인할 수 있습니다.
 
     전체 컨텐츠의 크기가 우리가 요구했던 높이 값보다 더 많아졌기 때문에 maring을 top 방향으로 footer의 높이 값 100px만큼 끌어올려주기 위해서 margin-top: -100px; 을 추가합니다.
+
+    ![top_fixed_layout3](./top_fixed_layout3.png)
 
     **5-1. content 상단 보이기**
 
@@ -1277,6 +1327,10 @@
     header가 position: fixed; 속성을 가지면서 header의 뒤쪽으로 content가 header의 높이 값 100px만큼 가려졌고, 또한 footer를 전체 높이 100%에 노출시키기 위하여 margin-top: -100px; 속성을 사용하면서 footer의 높이 값 100px 만큼 container가 끌어 올려졌기 때문입니다.
 
     content가 header 아래에서부터 시작할 수 있도록 총 끌어 올려진 200px 만큼을 padding-top 속성을 이용하여 밀어냅니다.
+
+    ![top_fixed_layout4](./top_fixed_layout4.png)
+
+    ![top_fixed_layout5](./top_fixed_layout5.png)
 
     ---
 
