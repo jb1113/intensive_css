@@ -34,6 +34,7 @@
     때문에 레이아웃 제작 과정중에 가장 단순하고 쉽습니다.
 
     ![1-column_layout](./1-column_layout.png)
+    > 출처 [https://www.boostcourse.org/web344/lecture/252324](https://www.boostcourse.org/web344/lecture/252324)
 
     1단 레이아웃은 하나의 행(column)으로 이루어진 레이아웃의 형태를 일컫습니다.
 
@@ -276,6 +277,7 @@
     다단 레이아웃은 1단 레이아웃과 함께 매우 대표적인 레이아웃 형태 중 하나입니다.
 
     ![multi-column_layout](./multi-column_layout.png)
+    > 출처 [https://www.boostcourse.org/web344/lecture/252338](https://www.boostcourse.org/web344/lecture/252338)
 
     예시 이미지와 같이 콘텐츠의 영역이 2개 또는 그 이상의 열(column)로 나눠진 레이아웃을 행의 개수에 따라 2단 레이아웃, 3단 레이아웃으로 부르고 있으며 이런 열의 개수에 따른 레이아웃들을 통틀어서 다단 레이아웃(multi column layout)이라고 부릅니다.
 
@@ -1064,6 +1066,7 @@
     고정 레이아웃이란 1단 또는 2단 레이아웃의 형태에서 상단(header)과 하단(footer) 또는 그 두 영역이 모두 컨텐츠의 높이나 내용에 상관없이 항상 노출이 되도록 하는 레이아웃 형태입니다.
 
     ![fixed_layout](./fixed_layout.gif)
+    > 출처 [https://www.boostcourse.org/web344/lecture/252344](https://www.boostcourse.org/web344/lecture/252344)
 
     ### 고정 레이아웃 형태를 가진 사이트들
 
