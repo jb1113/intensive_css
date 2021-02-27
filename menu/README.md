@@ -1,4 +1,4 @@
-# 메뉴
+# 메뉴 제작
 
 - 메뉴 소개
 
@@ -24,3 +24,9 @@
     - (네이버 영화) [movie.naver.com](https://movie.naver.com/)
     좌측을 보면 2단으로 구성된 세로 메뉴를 제공하고 있습니다.
     메뉴를 클릭하여 해당 페이지로 이동했을 경우 메뉴가 활성화되는 부분도 확인이 가능합니다.
+
+    ---
+
+    ### 참고자료
+
+    [CSS Navigation Bar](https://www.w3schools.com/css/css_navbar.asp)
